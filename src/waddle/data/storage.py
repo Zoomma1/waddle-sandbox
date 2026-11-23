@@ -100,6 +100,14 @@ def load_ohlcv(symbol: str, db_path: Path = DEFAULT_DB) -> pd.DataFrame:
     return df.set_index("timestamp")
 
 
+def count_ohlcv(symbol: str, db_path: Path = DEFAULT_DB) -> int:
+    """Count stored Binance spot bars for a symbol. Returns 0 for an unknown symbol."""
+    con = _connect(db_path)
+    (n,) = con.execute("SELECT COUNT(*) FROM ohlcv WHERE symbol = ?", (symbol,)).fetchone()
+    con.close()
+    return int(n)
+
+
 def save_ohlcv_bybit(df: pd.DataFrame, symbol: str, db_path: Path = DEFAULT_DB) -> int:
     """Upsert a DataFrame of Bybit linear-perp OHLCV bars. Returns rows written.
 
