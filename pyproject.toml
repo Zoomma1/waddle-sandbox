@@ -1,0 +1,31 @@
+[project]
+name = "waddle"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Zoomma1", email = "victorgerm1@hotmail.fr" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "ccxt>=4.5.48",
+    "matplotlib>=3.10.8",
+    "pandas>=3.0.2",
+    "pyyaml>=6.0.3",
+    "statsmodels>=0.14.6",
+]
+
+[project.scripts]
+waddle = "waddle:main"
+
+[build-system]
+requires = ["uv_build>=0.11.6,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
